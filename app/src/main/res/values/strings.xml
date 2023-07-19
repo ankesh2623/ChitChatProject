@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ChitChat</string>
+    <string name="InstructionPara">Enter the email associated with your account and we send an email with instructions to reset your password.</string>
+
+</resources>
