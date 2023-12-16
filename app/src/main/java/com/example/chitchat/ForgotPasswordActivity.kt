@@ -1,9 +1,12 @@
 package com.example.chitchat
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Patterns
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.chitchat.databinding.ActivityForgotPasswordBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -26,9 +29,15 @@ class ForgotPasswordActivity : AppCompatActivity() {
                 val email=binding.emailET?.text.toString().trim()
                 auth.sendPasswordResetEmail(email).addOnSuccessListener {
                     Toast.makeText(this,"Check mail",Toast.LENGTH_SHORT).show()
-                    //go to gmail i will implement here after learning webview
+                    val gotogmail=findViewById<TextView>(R.id.goToGmailText)
+                    gotogmail.text="Go to Gmail"
+                    gotogmail.setOnClickListener {
+                        val intent=Intent(Intent.ACTION_SENDTO)
+                        intent.data= Uri.parse("mailto:")
+                        startActivity(intent)
+                    }
                 }.addOnFailureListener{
-                    Toast.makeText(this,"Something went wrong",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,"Invalid User",Toast.LENGTH_SHORT).show()
                 }
             }
         }
